@@ -2,12 +2,15 @@
 
 /* START: Navbar */
 import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const navItems = ['Home', 'Services', 'Membership', 'About', 'Resources', 'Contact']
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [activeLink, setActiveLink] = useState('Home')
+  const pathname = usePathname()
+  const activeLink = pathname === '/' ? 'Home' : ''
 
   const openMenu = useCallback(() => {
     setMenuOpen(true)
@@ -24,8 +27,7 @@ export default function Navbar() {
   }, [menuOpen, openMenu, closeMenu])
 
   const handleNavClick = useCallback(
-    (label: string) => {
-      setActiveLink(label)
+    () => {
       if (menuOpen) closeMenu()
     },
     [menuOpen, closeMenu]
@@ -49,26 +51,36 @@ export default function Navbar() {
   return (
     <>
       <nav className="navbar">
-        <div className="logo">
+        <Link href="/" className="logo">
           <div className="logo-icon">⚡</div>
           <div className="logo-text">
             YIWA<span>LOGISTICS</span>
           </div>
-        </div>
+        </Link>
 
         <ul className="nav-links">
           {navItems.map((item) => (
             <li key={item}>
-              <a
-                href="#"
-                className={activeLink === item ? 'active' : ''}
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleNavClick(item)
-                }}
-              >
-                {item}
-              </a>
+              {item === 'Home' ? (
+                <Link
+                  href="/"
+                  className={activeLink === item ? 'active' : ''}
+                  onClick={handleNavClick}
+                >
+                  {item}
+                </Link>
+              ) : (
+                <a
+                  href="#"
+                  className={activeLink === item ? 'active' : ''}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleNavClick()
+                  }}
+                >
+                  {item}
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -99,12 +111,12 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div className={`mobile-menu${menuOpen ? ' active' : ''}`} id="mobileMenu">
         <div className="mobile-menu-header">
-          <div className="logo">
+          <Link href="/" className="logo" onClick={closeMenu}>
             <div className="logo-icon"></div>
             <div className="logo-text">
               YIWA<span>LOGISTICS</span>
             </div>
-          </div>
+          </Link>
           <button className="close-btn" id="closeBtn" aria-label="Close menu" onClick={closeMenu}>
             <span></span>
             <span></span>
@@ -114,16 +126,26 @@ export default function Navbar() {
         <ul className="nav-links">
           {navItems.map((item) => (
             <li key={item}>
-              <a
-                href="#"
-                className={activeLink === item ? 'active' : ''}
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleNavClick(item)
-                }}
-              >
-                {item}
-              </a>
+              {item === 'Home' ? (
+                <Link
+                  href="/"
+                  className={activeLink === item ? 'active' : ''}
+                  onClick={handleNavClick}
+                >
+                  {item}
+                </Link>
+              ) : (
+                <a
+                  href="#"
+                  className={activeLink === item ? 'active' : ''}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleNavClick()
+                  }}
+                >
+                  {item}
+                </a>
+              )}
             </li>
           ))}
         </ul>

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh repo:*)",
+      "Bash(npm run:*)",
+      "Bash(npx next:*)",
+      "Bash(npm install:*)",
+      "Bash(node -e \"const c = require\\(''eslint-config-next''\\); console.log\\(Object.keys\\(c\\)\\)\")",
+      "Bash(node -e \"const c = require\\(''eslint-config-next/dist/core-web-vitals''\\); console.log\\(JSON.stringify\\(Object.keys\\(c\\), null, 2\\)\\)\")",
+      "Bash(node -e \"const d=require\\(''''fs''''\\).readFileSync\\(''''/dev/stdin'''',''''utf8''''\\); const p=JSON.parse\\(d\\); console.log\\(JSON.stringify\\(p.exports,null,2\\)\\)\")",
+      "Bash(node -e \"const p = require\\(''./node_modules/eslint-config-next/package.json''\\); console.log\\(JSON.stringify\\(p.exports, null, 2\\)\\)\")",
+      "Bash(node --input-type=module -e \"import cwv from ''eslint-config-next/core-web-vitals''; console.log\\(Array.isArray\\(cwv\\), typeof cwv\\)\")"
+    ]
+  }
+}
